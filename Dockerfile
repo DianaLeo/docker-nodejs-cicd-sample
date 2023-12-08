@@ -18,6 +18,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     npm ci --include=dev
 USER node
 COPY . .
+CMD echo "dev"
 CMD npm run dev
 
 
@@ -39,6 +40,7 @@ USER node
 # Copy the rest of the source files into the image.
 COPY . .
 # Run the application.
+CMD echo "prod"
 CMD node src/index.js
 
 
@@ -57,4 +59,5 @@ COPY . .
 # The reason is that the CMD instruction runs when the container runs, 
 # and the RUN instruction runs when the image is being built
 # and the build will fail if the tests fail.
+RUN echo "test"
 RUN npm run test
